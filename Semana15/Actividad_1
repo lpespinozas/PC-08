@@ -1,0 +1,51 @@
+#pragma warning disable
+class Estudiante {
+
+static void PuedeMatricular(double notaAdmision) {
+    if (notaAdmision >= 75) {
+        Console.WriteLine("Enhorabuena! Has sido admitido en la San Carlos. 🤢");
+    }
+    else {
+        Console.WriteLine("Desafortunadamente, no has sido admitido. pipipi");
+    }
+}
+
+
+static void MostrarResumen(string nombre, int edad, string carrera, int carnet) {
+    Console.Clear();
+    Console.WriteLine("Datos:");
+    Console.WriteLine("--------------------------------------------");
+    Console.WriteLine($"El/la estudiante {nombre} de {edad} años, con el numero de carnet {carnet}, se encuentra cursando la carrera de {carrera}.");
+    
+}
+
+
+static void Main() {
+    Console.WriteLine("Bienvenid@, estudiante! Por favor ingresa los datos que se piden a continuacion.");
+    Console.Write("Nombre: ");
+    string nombre = Convert.ToString(Console.ReadLine());
+    Console.Write("Edad: ");
+    int edad = Convert.ToInt16(Console.ReadLine());
+    Console.Write("La carrera que esta cursando: ");
+    string carrera = Convert.ToString(Console.ReadLine());
+    Console.Write("Su numero de carnet: ");
+    int carnet = Convert.ToInt32(Console.ReadLine());
+    int verificacionCarnet = 2025;
+    string carnetAString = carnet.ToString();
+    string verificacionCarnetAString = verificacionCarnet.ToString();
+    while (carnetAString.EndsWith(verificacionCarnetAString) == false)
+     {
+        Console.WriteLine("Su numero de carnet no es valido o es de años anteriores. Por favor, intente de nuevo.");
+        Console.Write("Su numero de carnet: ");
+        carnet = Convert.ToInt32(Console.ReadLine());
+        carnetAString = carnet.ToString();
+    }
+    Console.Write("La nota que recibio en el examen de admision: ");
+    double notaAdmision = Convert.ToInt16(Console.ReadLine());
+    while (notaAdmision > 100 || notaAdmision < 0) {
+        Console.WriteLine("Su nota de admision no es quimicamente posible. Por favor, intente de nuevo.");
+        notaAdmision = Convert.ToInt16(Console.ReadLine());
+    }
+    MostrarResumen(nombre,edad,carrera,carnet);PuedeMatricular(notaAdmision);
+  }
+}
