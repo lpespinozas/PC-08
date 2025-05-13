@@ -1,0 +1,109 @@
+class IngresoValores() { 
+
+    static void Main()
+    {
+        string[] estudiantes = new string[10];
+        double[,] calificaciones = new double[10,10];
+        Console.WriteLine("Bienvenid@! Por favor ingrese los nombres de los estudiantes que calificara.");
+        for (int i = 0; i < estudiantes.Length; i++)
+        {
+            Console.WriteLine($"Ingrese el nombre del estudiante {i + 1}:");
+            estudiantes[i] = Console.ReadLine();
+            Console.Clear();
+        }   
+        Console.WriteLine("Ahora ingrese las calificaciones de cada estudiante para cada una de las 10 materias");
+        for (int fila = 0; fila < 10; fila++)
+        {
+            for (int columna = 0; columna < 10; columna++)
+            {
+                Console.WriteLine($"Ingrese la nota numero {columna + 1} del estudiante {estudiantes[fila]}");
+                calificaciones[fila,columna] = Convert.ToDouble(Console.ReadLine());
+                Console.Clear();
+            }
+        }
+        Console.WriteLine("Enhorabuena! Ya ha ingresado todos los nombres y las calificaciones necesarias!");
+        Menu(estudiantes,calificaciones);
+    }
+
+    static void NotasAprobadas(string[] nombres, double[,] punteo)
+    {
+        for (int i = 0; i < 10; i++) 
+        {
+            Console.Write($"Notas aprobadas del estudiante {nombres[i]}: ");
+            for (int j = 0; j < 10; j++)
+            {
+                if (punteo[i, j] >= 65)
+                {
+                    Console.Write($"{punteo[i, j]}, ");
+                }  
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar con el siguiente estudiante...");
+            Console.ReadKey();
+            Console.Clear();
+        }
+    }    static void NotasReprobadas(string[] nombres, double[,] punteo)
+    {
+        for (int i = 0; i < 10; i++) 
+        {
+            Console.Write($"Notas reprobadas del estudiante {nombres[i]}: ");
+            for (int j = 0; j < 10; j++)
+            {
+                if (punteo[i, j] < 65)
+                {
+                    Console.Write($"{punteo[i, j]}, ");
+                }  
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar con el siguiente estudiante...");
+            Console.ReadKey();
+            Console.Clear();
+        }
+    }
+
+    static void Promedio(string[] nombres, double[,] punteo)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            double suma = 0;
+            for (int j = 0; j < 10; j++)
+            {
+                suma += punteo[i, j];
+            }
+            double promedio = suma / 10;
+            Console.WriteLine($"El promedio del estudiante {nombres[i]} es: {promedio}");
+        }
+    }
+    static void Menu(string[] nombres, double[,] puntos)
+    {
+        Console.WriteLine("Por favor seleccione una de las siguientes opciones:");
+        Console.WriteLine("1. Ver notas aprobadas");
+        Console.WriteLine("2. Ver notas reprobadas");
+        Console.WriteLine("3. Ver promedio de cada estudiante");
+        Console.WriteLine("4. Salir");
+        int opcion = Convert.ToInt32(Console.ReadLine());
+        switch (opcion)
+        {
+            case 1:
+                NotasAprobadas(nombres, puntos);
+                break;
+            case 2:
+                NotasReprobadas(nombres, puntos);
+                break;
+            case 3:
+                Promedio(nombres, puntos);
+                break;
+            case 4:
+                Console.WriteLine("Gracias por usar la super calculadora magica estudiantil landivariana Pro Max. Presione cualquier tecla para salir");
+                Console.ReadKey();
+                break;
+            default:
+                Console.WriteLine("Opcion no valida, por favor intente nuevamente.");
+                Menu(nombres, puntos);
+                break;
+        }
+    }   
+}
+
+
+
+
+
